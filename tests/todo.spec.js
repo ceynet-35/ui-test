@@ -51,3 +51,19 @@ test('kasutaja saab ülesande kustutada', async ({ page }) => {
   await expect(page.getByText('Kustutatav ülesanne')).toHaveCount(0);
 
 });
+// TEST 4 - LISAÜLESANNE: kasutaja saab lisada kaks ülesannet ja nimekirjas on kaks ülesannet.
+test('kasutaja saab lisada kaks ülesannet', async ({ page }) => {
+  await page.goto(TODO_URL);
+
+  const input = page.getByPlaceholder('What needs to be done?');
+
+  await input.fill('Esimene lisaülesanne');
+  await input.press('Enter');
+
+  await input.fill('Teine lisaülesanne');
+  await input.press('Enter');
+
+  const tasks = page.getByTestId('todo-item');
+  await expect(tasks).toHaveCount(2);
+});
+
