@@ -13,26 +13,41 @@ test('kasutaja saab lisada ülesande', async ({ page }) => {
   await expect(page.getByText('Õpi UI testimist')).toBeVisible();
 });
 
-// TEST 2 – ÕPILANE: kasutaja saab ülesande lõpetatuks märkida.
+// TEST 2 - ÕPILANE: kasutaja saab ülesande lõpetatuks märkida.
 test('kasutaja saab ülesande lõpetatuks märkida', async ({ page }) => {
   await page.goto(TODO_URL);
+  
+  const input = page.getByPlaceholder('What needs to be done?');
+  await input.fill('Esimene test');
+  await input.press('Enter');
 
-  // TODO:
-  // 1. Lisa ülesanne "Esimene test".
-  // 2. Leia ülesande rida getByRole('listitem') ja filter({ hasText: ... }) abil.
-  // 3. Leia ülesande rea sees checkbox.
-  // 4. Märgi checkbox check() abil.
-  // 5. Kontrolli toBeChecked() abil, et checkbox on märgitud.
+  const task = page.getByRole('listitem').filter({
+    hasText: 'Esimene test'
+  });
+
+  const checkbox = task.getByRole('checkbox');
+  await checkbox.check();
+
+  await expect(checkbox).toBeChecked();
 });
+
 
 // TEST 3 – ÕPILANE: kasutaja saab ülesande kustutada.
 test('kasutaja saab ülesande kustutada', async ({ page }) => {
   await page.goto(TODO_URL);
 
-  // TODO:
-  // 1. Lisa ülesanne "Kustutatav ülesanne".
-  // 2. Leia ülesande rida.
-  // 3. Kasuta task.hover(), et kustutamisnupp nähtavale tuua.
-  // 4. Leia rea seest nupp CSS-lokaatoriga 'button.destroy' ja vajuta seda.
-  // 5. Kontrolli toHaveCount(0) abil, et ülesannet enam ei ole.
+  const input = page.getByPlaceholder('What needs to be done?');
+  await input.fill('Kustutatav ülesanne');
+  await input.press('Enter');
+
+  const task = page.getByRole('listitem').filter({
+    hasText: 'Kustutatav ülesanne'
+  });
+
+  await task.hover();
+
+  await task.locator('button.destroy').click();
+
+  await expect(page.getByText('Kustutatav ülesanne')).toHaveCount(0);
+
 });

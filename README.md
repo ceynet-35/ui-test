@@ -457,3 +457,17 @@ Sinu GitHubi repositoorium peab sisaldama:
 - [TodoMVC testkeskkond](https://demo.playwright.dev/todomvc/)
 
 **Edu testimisel!**
+
+### Vastused
+1. Mis vahe on manuaalsel ja automaatsel UI-testimisel?
+Manuaalse testimise korral teeb inimene kõik tegevused veebilehel käsitsi (klõpsab, sisestab teksti ja kontrollib tulemust silmaga).
+Automaatse UI-testimise korral teeb need samad tegevused ja kontrollid programmi abil arvuti (nt Playwright), mis on palju kiirem ja korduvkasutatav.
+2. Mida kontrollib sinu esimene test?
+Esimene test kontrollib, kas kasutaja saab TodoMVC veebirakenduses uue ülesande ("Õpi UI testimist") tekstiväljale sisestada, Enter-klahviga lisada ja kas see ülesanne ilmub seejärel ekraanile nähtavaks.
+3. Miks kasutatakse Playwrighti testides `expect()`?
+`expect()` funktsiooni kasutatakse tegeliku tulemuse võrdlemiseks oodatava tulemusega (nt kas element on nähtav, märgitud või kustutatud). Ilma selleta ei saaks test otsustada, kas rakendus töötab õigesti.
+4. Mida tähendab `passed` ja mida tähendab `failed`?
+`passed` tähendab, et test läbis edukalt ja tegelik tulemus vastas oodatule.
+`failed` tähendab, et test ebaõnnestus (kas tekkis viga või tegelik tulemus ei vastanud oodatule).
+5. Kas ebaõnnestunud test tähendab alati, et veebirakenduses on viga? Selgita.
+Ei tähenda alati. Test võib ebaõnnestuda ka siis, kui viga on testi enda koodis (nt vale lokaator, vale oodatav tekst, puuduv `await`) või kui internetiühendus/brauseri keskkond ei töötanud korrektselt.
